@@ -1,0 +1,103 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% PREPRINT TEMPLATE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Here I could talk about what one should do in this document.
+% Line spacing is 1.2 by default (can't be smaller).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% PREAMBLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Declare document class
+\documentclass[9pt,biorxiv,endfloat]{preprint}
+% Use the "onehalfspacing" option for 1.5 line spacing
+% Use the "doublespacing" option for 2.0 line spacing
+% Use the "lineno" option for line numbers
+% Use the "endfloat" option to place floats after the bibliography
+
+% Import packages
+\usepackage{lipsum}     % Required to insert dummy text
+\usepackage[version=4]{mhchem} % For chemical notation
+\usepackage{siunitx}    % For SI units
+\usepackage{pdflscape}  % For putting pages in landscape mode
+\usepackage{rotating}   % For rotating specific elements
+\usepackage{textgreek}  % Greek symbols
+\usepackage{gensymb}    % Symbols
+\usepackage[misc]{ifsym} % For the \Letter symbol
+\usepackage{orcidlink}  % For the \orcidlink
+\usepackage{listings}   % For inserting code chunks
+\usepackage{colortbl}   % For Knitr table colouring
+\usepackage{tabularx}   % For making Knitr tables compatible
+\usepackage{longtable}  % For multi-page tables
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{snotez}     % For sidenote environments. enotez for endnotes
+
+% Make declarations
+\DeclareSIUnit\Molar{M}
+
+% Please note that these options may affect formatting.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ARTICLE SETUP
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Paper title
+\title{A Preprint Template for LaTeX}
+
+% Authors - you can use \orcidlink{} and \authfn{}
+\author[ \orcidlink{0000-0002-9998-0058} 1 \Letter]{Mikkel Roald-Arb\o l}
+\author[2]{PhD Student}
+
+% Affiliations
+\affil[1]{School of Life Sciences, University of Sussex}
+\affil[2]{School of Hard Knock}
+
+% Correspondence
+\correspondence{m.roald-arbl@sussex.ac.uk}{MRA}
+
+% Contribution note
+\contribution[\authfn{1}\authfn{2}\authfn{3}\authfn{4}\authfn{5}]{These authors contributed equally to this work}
+
+% Present address of corresponding author
+\presentaddress[]{Evolution, Behaviour and Environment, School of Life Sciences, University of Sussex, Biology Road, Brighton, BN2 0EP, United Kingdom}
+
+% Data availability statement, funding and competing interests.
+\data[]{Preprocessed data should be available on Zenodo. For now, you'll have to do with all the code in this repository, available on GitHub.}
+\funding[]{MRA was supported by funding from the Leverhulme Foundation. The funders had no role in the template design or decision to publish.}
+\compint[]{The author declare no competing interests.}
+
+
+% Surname of the lead author(s) for the running footer
+\leadauthor{Roald-Arb\o l}
+\shorttitle{A Preprint Template for LaTeX}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ARTICLE START
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+\input{main/abstract}
+\input{main/introduction}
+\input{main/methods}
+\input{main/results}
+\input{main/discussion}
+\input{main/formal}
+\bibliography{bibliography}
+
+% DON'T EDIT. If "endfloat" option is enabled all floats appear before appendices
+\if@endfloat\clearpage\processdelayedfloats\clearpage\fi 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% APPENDICES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{appendix}
+\begin{appendixbox}\input{supplementary/resources}\end{appendixbox}
+\end{appendix}
+\end{document}

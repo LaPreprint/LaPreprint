@@ -1,0 +1,340 @@
+% --------------------------------------------------------------------------
+% the SNOTEZ package
+% 
+%   Sidenotes for LaTeX2e
+% 
+% --------------------------------------------------------------------------
+% Clemens Niederberger
+% Web:    https://bitbucket.org/cgnieder/enotez/
+% E-Mail: contact@mychemistry.eu
+% --------------------------------------------------------------------------
+% Copyright 2012--2020 Clemens Niederberger
+% 
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2008/05/04 or later.
+% 
+% This work has the LPPL maintenance status `maintained'.
+% 
+% The Current Maintainer of this work is Clemens Niederberger.
+% --------------------------------------------------------------------------
+\def\snotez@date{2020/12/14}
+\def\snotez@version{v0.5a}
+\def\snotez@description{sidenote support for LaTeX 2e (CN)}
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{snotez}[\snotez@date\space \snotez@version\space \snotez@description]
+
+\RequirePackage{etoolbox,pgfopts,marginnote}
+\@ifpackageloaded{zref-abspage}
+  {\RequirePackage{perpage}}
+  {\AtEndPreamble{\RequirePackage{perpage}}}
+
+% --------------------------------------------------------------------------
+% package options:
+\newbool{snotez@marginnote}
+\newbool{snotez@perpage}
+\newbool{snotez@footnote}
+\newbool{snotez@dblarg}
+
+\newcommand*\snotez@note@mark@sep{\space}
+\newcommand*\snotez@note@mark@format[1]{\@textsuperscript{\normalfont#1}}
+\newcommand*\snotez@format{\normalfont\footnotesize}
+\newcommand*\snotez@text@mark@format[1]{\@textsuperscript{\normalfont#1}}
+
+\pgfkeys{
+  snotez/.cd,
+    % all sidenotes use \marginnote:
+    marginnote/.is if       = snotez@marginnote ,
+    % formatting of the note text:
+    text-format/.code       = \renewcommand*\snotez@format{#1} ,
+    text-format+/.code      =
+      \expandafter\renewcommand
+      \expandafter*%
+      \expandafter\snotez@format
+      \expandafter{\snotez@format#1} ,
+    % make sidenotes counted per page:
+    perpage/.is if          = snotez@perpage ,
+    % formatting of the note mark:
+    note-mark-sep/.code     = \renewcommand*\snotez@note@mark@sep{#1} ,
+    note-mark-format/.code  = \renewcommand*\snotez@note@mark@format[1]{#1} ,
+    text-mark-format/.code  = \renewcommand*\snotez@text@mark@format[1]{#1} ,
+    % make all footnotes sidenotes:
+    footnote/.is if         = snotez@footnote ,
+    % change optional argument input:
+    dblarg/.is if           = snotez@dblarg ,
+    % formmatting of the sidefloats' contents:
+    sidefloat-format/.code  = \renewcommand*\snotez@sidefloat@format{#1} ,
+    sidefloat-format+/.code =
+      \expandafter\renewcommand
+      \expandafter*%
+      \expandafter\snotez@sidefloat@format
+      \expandafter{\snotez@sidefloat@format#1}
+}
+
+\ProcessPgfOptions*
+
+\newrobustcmd\setsidenotes[1]{\pgfqkeys{/snotez}{#1}}
+
+% --------------------------------------------------------------------------
+% the \sidenote command
+\ifbool{snotez@dblarg}{
+  \newrobustcmd*\sidenote{%
+    \snotez@sidenote@dblarg
+  }
+}{
+  \newrobustcmd*\sidenote{%
+    \snotez@sidenote@nodblarg
+  }
+}
+
+% syntax:
+% - \sidenote{text}
+% - \sidenote[mark]{text}
+% - \sidenote[offset][mark]{text}
+\newrobustcmd*\snotez@sidenote@dblarg{%
+  \@ifnextchar[%
+    {\snotez@sidenote@dblarg@aux}
+    {\snotez@sidenote@aux{}[]}% no option
+}
+
+\protected\def\snotez@sidenote@dblarg@aux[#1]{%
+  \@ifnextchar[%
+    {\snotez@sidenote@aux{#1}}% two options
+    {\snotez@sidenote@aux{}[{#1}]}% one option
+}
+
+% syntax:
+% - \sidenote{text}
+% - \sidenote[mark]{text}
+% - \sidenote(offset){text}
+% - \sidenote(offset)[mark]{text}
+\newrobustcmd*\snotez@sidenote@nodblarg{%
+  \@ifnextchar(%
+    {\snotez@sidenote@nodblarg@aux}% offset
+    {%
+      \@ifnextchar[
+        {\snotez@sidenote@aux{}}% no offset but mark
+        {\snotez@sidenote@aux{}[]}% no offset and no mark
+    }%
+}
+
+\protected\def\snotez@sidenote@nodblarg@aux(#1){%
+  \@ifnextchar[%
+    {\snotez@sidenote@aux{#1}}% mark
+    {\snotez@sidenote@aux{#1}[]}% no mark
+}
+
+% #1: offset
+% #2: mark
+% #3: text
+\long\def\snotez@sidenote@aux#1[#2]#3{%
+  \snotez@mark{#2}%
+  \snotez@text{#1}{#3}%
+}
+
+% this one is very much \@footnotemark from latex.ltx:
+\newrobustcmd*\snotez@write@mark[1]{%
+  \leavevmode
+  \ifhmode\edef\@x@sf{\the\spacefactor}\nobreak\fi
+  #1%
+  \ifhmode\spacefactor\@x@sf\fi
+  \relax
+}
+
+\newrobustcmd*\snotez@mark[1]{%
+  \ifblank{#1}% or \ifstrempty?
+    {%
+      \refstepcounter{sidenote}%
+      \protected@xdef\@the@snotez@mark{\thesidenote}%
+    }
+    {%
+      \protected@edef\@currentlabel{#1}%
+      \protected@xdef\@the@snotez@mark{#1}%
+    }%
+  \snotez@write@mark{%
+    \hbox{\snotez@text@mark@format{\@the@snotez@mark}}}%
+}
+
+\ifltxcounter{chapter}
+  {\newcounter{sidenote}[chapter]}
+  {\newcounter{sidenote}}
+
+% --------------------------------------------------------------------------
+% the \sidenotemark command
+\newrobustcmd*\sidenotemark[1][]{\snotez@mark{#1}}
+
+% --------------------------------------------------------------------------
+% the \sidenotetext command
+\ifbool{snotez@dblarg}{
+  \newrobustcmd*\sidenotetext{%
+    \snotez@sidenotetext@dblarg
+  }
+}{
+  \newrobustcmd*\sidenotetext{%
+    \snotez@sidenotetext@nodblarg
+  }
+}
+
+% syntax:
+% - \sidenotetext{text}
+% - \sidenotetext[mark]{text}
+% - \sidenotetext[offset][mark]{text}
+\newrobustcmd*\snotez@sidenotetext@dblarg{%
+  \@ifnextchar[%
+    {\snotez@sidenotetext@dblarg@aux}
+    {\snotez@sidenotetext@aux{}[]}% no option
+}
+
+\protected\def\snotez@sidenotetext@dblarg@aux[#1]{%
+  \@ifnextchar[%
+    {\snotez@sidenotetext@aux{#1}}% two options
+    {\snotez@sidenotetext@aux{}[{#1}]}% one option
+}
+
+% syntax:
+% - \sidenotetext{text}
+% - \sidenotetext[mark]{text}
+% - \sidenotetext(offset){text}
+% - \sidenotetext(offset)[mark]{text}
+\newrobustcmd*\snotez@sidenotetext@nodblarg{%
+  \@ifnextchar(%
+    {\snotez@sidenotetext@nodblarg@aux}% offset
+    {%
+      \@ifnextchar[
+        {\snotez@sidenotetext@aux{}}% no offset nut mark
+        {\snotez@sidenotetext@aux{}[]}% no offset and no mark
+    }%
+}
+
+\protected\def\snotez@sidenotetext@nodblarg@aux(#1){%
+  \@ifnextchar[%
+    {\snotez@sidenotetext@aux{#1}}% mark
+    {\snotez@sidenotetext@aux{#1}[]}% no mark
+}
+
+% #1: offset
+% #2: mark
+% #3: text
+\long\protected\def\snotez@sidenotetext@aux#1[#2]#3{%
+  \ifblank{#2}{}{\protected@xdef\@the@snotez@mark{#2}}%
+  \snotez@text{#1}{#3}%
+}
+
+% #1: offset
+% #2: text
+\newrobustcmd*\snotez@text[2]{%
+  \ifblank{#1}
+    {%
+      \snotez@marginpar{%
+        \snotez@format
+        \snotez@write@mark{\snotez@note@mark@format{\@the@snotez@mark}}%
+        \snotez@note@mark@sep#2}%
+    }
+    {%
+      \snotez@marginnote{%
+        \snotez@format
+        \snotez@write@mark{\snotez@note@mark@format{\@the@snotez@mark}}%
+        \snotez@note@mark@sep#2%
+      }[\snotez@if@nblskip{#1}]%
+    }%
+}
+
+\newcommand*\snotez@if@nblskip[1]{%
+  % if #1 starts with * gobble it and add \baselineskip:
+  \expandafter\ifx\@car#1\@nil*%
+    \expandafter\@firstoftwo
+  \else
+    \expandafter\@secondoftwo
+  \fi
+  {\@cdr#1\@nil\baselineskip}%
+  {#1}%
+}
+
+\let\snotez@marginpar\marginpar
+\let\snotez@marginnote\marginnote
+
+% --------------------------------------------------------------------------
+% margin floats with captions, based on an idea in tufte-latex
+\newsavebox\snotez@sidefloat@box
+\newcommand*\snotez@sidefloat@format{\raggedright}
+
+\newenvironment{snotez@sidefloat}[2]
+  {%
+    \def\@captype{#1}%
+    \begin{lrbox}{\snotez@sidefloat@box}%
+      \minipage{\marginparwidth}%
+      \snotez@sidefloat@format#2%
+  }
+  {
+      \endminipage
+    \end{lrbox}%
+    \marginpar{\unhbox\snotez@sidefloat@box}%
+  }
+
+\newrobustcmd*\snotez@new@sidefloat[2]{%
+  \newenvironment{side#1}
+    {\snotez@sidefloat{#1}{#2}}
+    {\endsnotez@sidefloat}%
+}
+
+\newrobustcmd*\newsnotezfloat[2][]{\snotez@new@sidefloat{#2}{#1}}
+
+\newsnotezfloat{figure}
+\newsnotezfloat{table}
+
+% --------------------------------------------------------------------------
+% process preamble options:
+\AtBeginDocument{
+  % if option `footnote=true' let \footnote to \sidenote:
+  \ifbool{snotez@footnote}
+    {
+      \let\footnote\sidenote
+      \let\footnotemark\sidenotemark
+      \let\footnotetext\sidenotetext
+      \ifdef\multfootnote{%
+        \let\multfootnote\multsidenote
+      }{}%
+    }{}
+  % if option `marginnote=true' use \marginnote for all notes:
+  \ifbool{snotez@marginnote}
+    {%
+      \let\snotez@marginpar\marginnote
+      \PackageInfo{snotez}
+        {All sidenotes are now using \string\marginnote^^J
+         instead of \string\marginpar}%
+    }%
+    {}
+}
+
+\AtEndPreamble{%
+  % if option `perpage=true' count notes per page:
+  \ifbool{snotez@perpage}
+    {\MakeSortedPerPage{sidenote}}
+    {\MakeSorted{sidenote}}%
+}
+
+\endinput
+
+% --------------------------------------------------------------------------
+% HISTORY:
+2012/11/15 v0.1  - first version
+2013/04/03 v0.2  - documentation, removed erroneous `fnpct' adaption, other
+                   minor changes
+                 - added update of \@currentlabel when a custom mark is used
+2013/04/21 v0.3  - try to avoid conflict with package loading order of
+                   `perpage' and `zref-abspage'
+                 - allow `*' syntax for offsets that are multiples of
+                   \baselineskip
+                 - syntax change in optional arguments; option `dblarg'
+                   provides previous syntax >> this is the default
+2013/06/13 v0.3a - better separation of definition of \sidenote and
+                   \sidenotetext commands and the internal commands
+2013/11/21 v0.4  - robustify commands where appropriate
+                 - use cnltx-base
+2020/01/12 v0.5  - remove dependency on `cnltx-base'
+2020/12/14 v0.5a - fix issue #1
