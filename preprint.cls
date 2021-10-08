@@ -9,6 +9,7 @@
 \RequirePackage{etoolbox}
 \RequirePackage{regexpatch}
 \RequirePackage{ifxetex,ifluatex}
+\RequirePackage{marginfix}  % Solves the issue of long notes running over the bottom of the page
 
 \newif\ifxetexorluatex
 \ifxetex
@@ -349,8 +350,10 @@
    \textcolor{eLifeMediumGrey}{\rule{\textwidth}{2pt}}
    \vskip16pt
    \textcolor{lightColour}{\large\bfseries\abstractname\space}
+
+   % Here we squeeze in the margin metadata
    \marginpar{\raggedright\footnotesize\themetadata\par}
-}{%   
+}{%
    \vskip8pt
    \textcolor{eLifeMediumGrey}{\rule{\textwidth}{2pt}}
    \vskip16pt
@@ -382,7 +385,6 @@
     \refstepcounter{featuretable}%
     \vskip\smallskipamount%
     {\small\textbf{\color{darkColour}Box \arabic{featurebox} Table \arabic{featuretable}.}\space #1\par}\medskip}
-
 }
 \apptocmd{\featurebox}{%
   \begin{mdframed}[linewidth=0pt,backgroundcolor=lightColour!10,fontcolor=darkColour]
