@@ -198,7 +198,7 @@
 {}{\PackageWarning{eLife}{Failed to patch year format in citation}}
 %% There, we're finally done with patching the year in citations.
 
-%
+
 % headers and footers
 %
 \RequirePackage{fancyhdr}  % custom headers/footers
