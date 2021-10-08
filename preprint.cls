@@ -25,8 +25,33 @@
 %% Preprint server
 \newif\if@biorxiv
 \newif\if@medrxiv
+\newif\if@arxiv 
+\newif\if@chemrxiv
 \DeclareOption{biorxiv}{\@biorxivtrue}
 \DeclareOption{medrxiv}{\@medrxivtrue}
+\DeclareOption{arxiv}{\@arxivtrue}
+\DeclareOption{chemrxiv}{\@chemrxivtrue}
+\newcommand{\ppserver}{Preprint} % Make command for the preprint logo
+\renewcommand{\ppserver}{
+  \if@biorxiv
+    bio\textcolor{red}{R}$\chi$iv
+  \fi
+  \if@medrxiv
+    med\textcolor{blue}{R}$\chi$iv
+  \fi
+  \if@arxiv
+    ar\textcolor{red}{X}iv
+  \fi
+  \if@chemrxiv
+    \textbf{Chem}\textcolor{lightgray}{Rxiv}
+  \fi
+}
+
+%% Colour scheme
+\newif\if@blue
+\newif\if@red
+\DeclareOption{blue}\@bluetrue
+\DeclareOption{red}\@redtrue
 
 %% Line numbers
 \newif\if@reqslineno
@@ -36,7 +61,7 @@
 \newif\if@endfloat
 \DeclareOption{endfloat}{\@endfloattrue}
 
-%% Linespacing.
+%% Linespacing
 \newif\if@onehalfspacing
 \newif\if@doublespacing
 \DeclareOption{onehalfspacing}{\@onehalfspacingtrue}
@@ -85,18 +110,20 @@
 
 \RequirePackage{graphicx}
 \RequirePackage[table]{xcolor}
-\if@biorxiv
-    \definecolor{darkColour}{HTML}{8F3840}
-    \definecolor{lightColour}{HTML}{CC505C}
-    \definecolor{eLifeMediumGrey}{HTML}{6D6E70}
-    \definecolor{eLifeLightGrey}{HTML}{929497}
+
+% Colour scheme
+\if@red
+  \definecolor{darkColour}{HTML}{8F3840}
+  \definecolor{lightColour}{HTML}{CC505C}
+  \definecolor{eLifeMediumGrey}{HTML}{6D6E70}
+  \definecolor{eLifeLightGrey}{HTML}{929497}
+\else
+  \definecolor{darkColour}{HTML}{0E4B92}
+  \definecolor{lightColour}{HTML}{357ABF}
+  \definecolor{eLifeMediumGrey}{HTML}{6D6E70}
+  \definecolor{eLifeLightGrey}{HTML}{929497}
 \fi
-\if@medrxiv
-    \definecolor{darkColour}{HTML}{0E4B92}
-    \definecolor{lightColour}{HTML}{357ABF}
-    \definecolor{eLifeMediumGrey}{HTML}{6D6E70}
-    \definecolor{eLifeLightGrey}{HTML}{929497}
-\fi
+
 
 \RequirePackage{booktabs}
 \RequirePackage{authblk}
@@ -190,25 +217,25 @@
 % From Henriques' Lab bioRxiv template
 \newcommand{\shorttitle}[1]{\def\@shorttitle{#1}}
 \newcommand{\leadauthor}[1]{\def\@leadauthor{#1}}
-\def\aBioRXiv{{\footnotesize
-    \@leadauthor\ifnum \value{authors} > 1\hspace{2pt}\textit{et al.}\fi\hspace{7pt}|\hspace{7pt}bio\textcolor{red}{R}$\chi$iv\hspace{7pt}|\hspace{7pt}\today\hspace{7pt}|\hspace{7pt}\thepage\textendash\pageref{LastPage}
+\def\ppfooterA{{\footnotesize
+    \@leadauthor\ifnum \value{authors} > 1\hspace{2pt}\textit{et al.}\fi\hspace{7pt}|\hspace{7pt}\ppserver\hspace{7pt}|\hspace{7pt}\today\hspace{7pt}|\hspace{7pt}\thepage\textendash\pageref{LastPage}
   }}
   
-\def\cBioRXiv{{\footnotesize
-    bio\textcolor{red}{R}$\chi$iv\hspace{7pt}|\hspace{7pt}\thepage\space of\space\pageref{LastPage}
+\def\ppfooterB{{\footnotesize
+    \ppserver\hspace{7pt}|\hspace{7pt}\thepage\space of\space\pageref{LastPage}
   }}
    
-\def\dBioRXiv{{\footnotesize
+\def\ppfooterC{{\footnotesize
     \@leadauthor\ifnum \value{authors} > 1\hspace{2pt}\textit{et al.} \the\year{}\fi\hspace{7pt}|\hspace{7pt}\@shorttitle
   }}
 
-\lfoot{\dBioRXiv}
-\rfoot{\cBioRXiv}
+\lfoot{\ppfooterC}
+\rfoot{\ppfooterB}
 \preto{\footrule}{\color{eLifeMediumGrey}}
 
 \fancypagestyle{plain}{
 \fancyhf{}
-\fancyfoot[R]{\aBioRXiv}}
+\fancyfoot[R]{\ppfooterA}}
 
 
 %\rfoot{\small\color{eLifeMediumGrey}\thepage\space of\space\pageref{LastPage}}%
