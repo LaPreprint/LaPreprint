@@ -5,6 +5,13 @@ The document class is called with:
 \documentclass[9pt,biorxiv,lineno,endfloat]{preprint}
 ```
 
+## Quick start
+1. Click `Use this template` or clone the repository
+2. In `main.tex`, edit `Article setup` to have the correct information.
+3. Start writing! The sections are found in the `main` folder.
+
+If you want different sections you can easily rename them - just make sure also to edit the names in `main.tex`.
+
 ## Features
 The document class provides the following options:
 - Choose between `biorxiv`, `medrxiv`, `arxiv` and `chemrxiv`. Otherwise defaults to `preprint`.  
