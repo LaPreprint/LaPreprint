@@ -21,5 +21,8 @@ The document class provides the following options:
 
 ## Other features
 ### Figures
-- `fullwidth`
-- `subfigure`
+- `\fullwidth`
+- `\subfigure`
+
+## Sidenotes
+- `\sidenote{Note in here}`
