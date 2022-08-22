@@ -357,7 +357,7 @@
     \bigskip\textbf{Funding: }\@funding\par\fi
     \ifx\empty\@compint\else
     \bigskip\textbf{Competing interests: }\@compint\par\fi
-    
+    \bigskip
 }
 
 \patchcmd{\@author}{\AB@authlist\\[\affilsep]\AB@affillist}{\AB@authlist\\[\affilsep] 
