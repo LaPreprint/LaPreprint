@@ -5,9 +5,8 @@
 <a href="#"><img alt="Twitter" src="https://img.shields.io/twitter/follow/roaldarbol?style=social"></a>
 </p>
 
-
 <p align="center">
-  <img width="300" height="420" src="https://user-images.githubusercontent.com/25629697/186152620-72626796-53c0-4f29-a44a-399454deceb8.jpg">
+  <img width="297" height="420" src="https://user-images.githubusercontent.com/25629697/186179901-fd43f669-f187-454e-a1fd-84333a002ba2.png">
 </p>
 <p align="center">
   <b>An easy way to create pretty, nicely formatted preprints in LaTeX.</b>
