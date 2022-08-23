@@ -1,8 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% PREPRINT TEMPLATE
+%%% LaPreprint: PREPRINT TEMPLATE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Here I could talk about what one should do in this document.
+% Instead I'll refer you to the explore on your own as check the Github Repo. :-)
 % Line spacing is 1.2 by default (can't be smaller).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -10,7 +11,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Declare document class
-\documentclass[9pt,biorxiv,endfloat]{preprint}
+\documentclass[9pt,biorxiv,lineno]{preprint}
 % Choose between "biorxiv", "medrxiv", "arxiv" and "chemrxiv". Otherwise defaults to Preprint.
 % Use the "onehalfspacing" option for 1.5 line spacing
 % Use the "doublespacing" option for 2.0 line spacing
@@ -40,40 +41,39 @@
 
 % Please note that these options may affect formatting.
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% ARTICLE SETUP
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Paper title
-\title{LaPreprint: \\ A Preprint Template for LaTeX}
+\title{LaPreprint: \\ A Preprint Template for \LaTeX}
 
-% Authors - you can use \orcidlink{} and \authfn{}
+% Authors - you can use \orcidlink{} and \authfn{} - see contribution note
 \author[ \orcidlink{0000-0002-9998-0058} 1 \Letter]{Mikkel Roald-Arb\o l}
-\author[2]{PhD Student}
+\author[2]{Co-author}
 
 % Affiliations
 \affil[1]{School of Life Sciences, University of Sussex}
-\affil[2]{School of Hard Knock}
+\affil[2]{University of Somewhere}
 
 % Correspondence
-\correspondence{m.roald-arbl@sussex.ac.uk}{MRA}
+\correspondence{https://github.com/roaldarbol/LaPreprint/issues}{MRA}
 
 % Contribution note
-\contribution[\authfn{1}\authfn{2}\authfn{3}]{These authors contributed equally to this work}
+\contribution[\authfn{1}\authfn{2}\authfn{3}]{Here's a few symbols to denote contribution specifics, e.g. authors who contributed equally to the work.}
 
 % Present address of corresponding author
-\presentaddress[]{Evolution, Behaviour and Environment, School of Life Sciences, University of Sussex, Biology Road, Brighton, BN2 0EP, United Kingdom}
+\presentaddress[]{Evolution, Behaviour and Environment, School of Life Sciences, University of Sussex, Biology Road, Brighton, BN1 9RH, United Kingdom}
 
 % Data availability statement, funding and competing interests.
-\data[]{Preprocessed data should be available on Zenodo. For now, you'll have to do with all the code in this repository, available on GitHub.}
+\data[]{Data availability statement. Preprocessed data could be available e.g. on \href{https://zenodo.org/}{Zenodo}.}
 \funding[]{MRA was supported by funding from the Leverhulme Foundation. The funders had no role in the template design or decision to publish.}
 \compint[]{The author declare no competing interests.}
 
 
 % Surname of the lead author(s) for the running footer
 \leadauthor{Roald-Arb\o l}
-\shorttitle{A Preprint Template for LaTeX}
+\shorttitle{A Preprint Template for \LaTeX}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% ARTICLE START
@@ -94,10 +94,16 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% APPENDICES
+%%% SUPPLEMENTARY MATERIAL / APPENDICES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{appendix}
 \begin{appendixbox}\input{supplementary/resources}\end{appendixbox}
 \end{appendix}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ARTICLE END
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \end{document}

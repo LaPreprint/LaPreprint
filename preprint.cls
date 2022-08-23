@@ -102,10 +102,10 @@
 \linespread{1.2}
 \if@onehalfspacing\linespread{1.5}\fi
 \if@doublespacing\linespread{2.0}\fi
-\AtBeginDelayedFloats{% Also changes for endfloat captions
+\if@endfloat\AtBeginDelayedFloats{% Also changes for endfloat captions
       \renewcommand{\baselinestretch}{1.2}
       \if@onehalfspacing\renewcommand{\baselinestretch}{1.5}\fi%
-      \if@doublespacing\renewcommand{\baselinestretch}{2.0}\fi}
+      \if@doublespacing\renewcommand{\baselinestretch}{2.0}\fi}\fi
 
 
 \RequirePackage{graphicx}
@@ -168,7 +168,8 @@
 \IfFileExists{vancouver-elife.bst}
   {\bibliographystyle{vancouver-elife}}
   {\PackageWarning{elife}{vancouver-elife.bst not found; falling back to apalike bibliography style.}\bibliographystyle{apalike}}
-% Make author in citation italic
+
+  % Make author in citation italic
 \renewcommand{\NAT@nmfmt}[1]{{\bfseries\itshape\color{eLifeMediumGrey} #1}}
 
 % ...as well as the year
