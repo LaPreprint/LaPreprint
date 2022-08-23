@@ -526,6 +526,7 @@
   \begin{mdframed}[hidealllines=true,backgroundcolor=lightColour!10,leftline=true,linecolor=lightColour,linewidth=1em]
   \if@reqslineno\addtolength{\linenumbersep}{2em}\internallinenumbers\fi
 }{%
+  \vspace{1em}%
   \end{mdframed}
 }
 
