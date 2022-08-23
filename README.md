@@ -12,7 +12,7 @@
   <b>An easy way to create pretty, nicely formatted preprints in LaTeX.</b>
 </p>
 
-## Quick start
+# Quick start
 1. Click `Use this template`
 2. Open the document in your preferred environment ([e.g. Overleaf or VSCode](https://github.com/roaldarbol/LaPreprint/wiki/Working-environment))
 3. In `main.tex`, edit `Article setup` to have the correct information
@@ -32,7 +32,7 @@ The document class provides the following options:
 - Use the `lineno` option for line numbers.  
 - Use the `endfloat` option to place floats after the bibliography.  
 
-## Other features
+
 There are certain editorial problems authors will likely often run into when writing papers. I've tried to find the best solutions to common features, and these should be fairly well supported:
 
 ### Figures
@@ -42,5 +42,5 @@ There are certain editorial problems authors will likely often run into when wri
 ### Sidenotes
 - `sidenote`: For notes, I really like sidenotes - and I've opted to use `\sidenote{}` for this purpose.
 
-## Acknowledgements
-LaPreprint is inspired by the style of eLife and PLoS, and is based on the eLife template. Additionally, the fancy footer is modified from the [the Henriques Lab template](https://www.overleaf.com/latex/templates/henriqueslab-biorxiv-template/nyprsybwffws). Without those all their work, this template wouldn't exist!
+# Acknowledgements
+LaPreprint is inspired by the style of eLife and PLoS, and is based on the eLife template. Additionally, the fancy footer is modified from the [the Henriques Lab template](https://www.overleaf.com/latex/templates/henriqueslab-biorxiv-template/nyprsybwffws). Without all their work, this template wouldn't exist!
