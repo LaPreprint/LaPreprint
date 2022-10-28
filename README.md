@@ -29,6 +29,7 @@ The document class is called with:
 ```
 The document class provides the following options:
 - Choose between `biorxiv`, `medrxiv`, `arxiv` and `chemrxiv`. Otherwise defaults to `preprint`.
+- Choose between `blue` and `red` colour scheme. Defaults to `blue`.
 - Use the `onehalfspacing` or `doublespacing` option for 1.5/2.0 line spacing.  
 - Use the `lineno` option for line numbers.  
 - Use the `endfloat` option to place floats after the bibliography.  
