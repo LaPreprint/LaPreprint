@@ -1,7 +1,7 @@
 % A template for preprint submissions.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{preprint}[2021/06/22, v0.1]
+\ProvidesClass{lapreprint}[2022/10/28, v1.0]
 % The vast majority of this template comes from the eLife submissions template, created by Overleaf (writeLaTeX). 
 
 \RequirePackage[english]{babel}

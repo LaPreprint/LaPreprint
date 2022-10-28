@@ -11,7 +11,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Declare document class
-\documentclass[9pt,biorxiv,lineno,blue]{preprint}
+\documentclass[9pt,biorxiv,lineno,blue]{lapreprint}
 % Choose between "biorxiv", "medrxiv", "arxiv" and "chemrxiv". Otherwise defaults "Preprint".
 % Choose between "blue" and "red" colour scheme. Defaults to "blue".
 % Use the "onehalfspacing" option for 1.5 line spacing.
@@ -82,13 +82,13 @@
 
 \begin{document}
 \maketitle
-\input{main/abstract}
-\input{main/introduction}
-\input{main/methods}
-\input{main/results}
-\input{main/discussion}
-\input{main/formal}
-\bibliography{bibliography}
+\input{src/main/abstract}
+\input{src/main/introduction}
+\input{src/main/methods}
+\input{src/main/results}
+\input{src/main/discussion}
+\input{src/main/formal}
+\bibliography{src/bibliography}
 
 % DON'T EDIT. If "endfloat" option is enabled all floats appear before appendices
 \if@endfloat\clearpage\processdelayedfloats\clearpage\fi 
@@ -100,10 +100,10 @@
 
 \begin{appendix}
 \begin{appendixbox}\label{app:ttt}
-    \input{supplementary/appendices.tex}
+    \input{src/supplementary/appendices.tex}
 \end{appendixbox}
 \begin{appendixbox}
-    \input{supplementary/resources.tex}
+    \input{src/supplementary/resources.tex}
 \end{appendixbox}
 \end{appendix}
 
