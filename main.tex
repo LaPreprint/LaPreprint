@@ -3,7 +3,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Here I could talk about what one should do in this document.
-% Instead I'll refer you to the explore on your own as check the Github Repo. :-)
+% Instead I'll refer you to the explore on your own and check the Github Repo. :-)
 % Line spacing is 1.2 by default (can't be smaller).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -11,7 +11,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Declare document class
-\documentclass[9pt,biorxiv,lineno,blue]{lapreprint}
+\documentclass[9pt,biorxiv,lineno]{lapreprint}
 % Choose between "biorxiv", "medrxiv", "arxiv" and "chemrxiv". Otherwise defaults "Preprint".
 % Choose between "blue" and "red" colour scheme. Defaults to "blue".
 % Use the "onehalfspacing" option for 1.5 line spacing.
@@ -20,7 +20,7 @@
 % Use the "endfloat" option to place floats after the bibliography.
 
 % Import packages
-\usepackage{lipsum}     % Required to insert dummy text
+% \usepackage{lipsum}     % Required to insert dummy text
 \usepackage[version=4]{mhchem} % For chemical notation
 \usepackage{siunitx}    % For SI units
 \usepackage{pdflscape}  % For putting pages in landscape mode
@@ -36,11 +36,26 @@
 \usepackage{subcaption}
 \usepackage{multirow}
 \usepackage{snotez}     % For sidenote environments. enotez for endnotes
+\usepackage{csquotes}   % For language-based quote rules (helps BiBLaTeX)
 
 % Make declarations
 \DeclareSIUnit\Molar{M}
 
-% Please note that these options may affect formatting.
+% Please note that these options may affect formatting. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% BIBLIOGRAPHY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[			% use biblatex for bibliography
+	backend=biber,      % use biber or bibtex backend
+    style=authoryear,   % choose style
+	natbib=true,		% allow natbib commands
+	hyperref=true,	    % activate hyperref support
+	alldates=year,      % only show year (not month)
+]{biblatex}
+
+% Update to your bibliography file
+\addbibresource{src/bibliography.bib}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% ARTICLE SETUP
@@ -88,7 +103,7 @@
 \input{src/main/results}
 \input{src/main/discussion}
 \input{src/main/formal}
-\bibliography{src/bibliography}
+\printbibliography
 
 % DON'T EDIT. If "endfloat" option is enabled all floats appear before appendices
 \if@endfloat\clearpage\processdelayedfloats\clearpage\fi 
@@ -97,14 +112,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% SUPPLEMENTARY MATERIAL / APPENDICES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%% Sadly, we can't use floats in the appendix boxes. So they don't "float", but use \captionof{figure}{...} and \captionof{table}{...} to get them properly caption.
 \begin{appendix}
+
 \begin{appendixbox}\label{app:ttt}
     \input{src/supplementary/appendices.tex}
 \end{appendixbox}
+
 \begin{appendixbox}
     \input{src/supplementary/resources.tex}
 \end{appendixbox}
+
 \end{appendix}
 
 
