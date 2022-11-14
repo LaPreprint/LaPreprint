@@ -76,10 +76,6 @@
 \newif\if@endfloat
 \DeclareOption{endfloat}{\@endfloattrue}
 
-%% BiBLaTeX
-\newif\if@biblatex
-\DeclareOption{biblatex}{\@biblatextrue}
-
 %% Linespacing
 \newif\if@onehalfspacing
 \newif\if@doublespacing
@@ -258,66 +254,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% ADDITIONAL FRONT PAGE META DATA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% to-do: Would be nice to have a single command that can be looped through later on
-\def\@correspondence{}
-\def\@contribution{}
-\def\@presentaddress{}
-\def\@deceased{}
-\def\@data{}
-\def\@funding{}
-\def\@compint{}
+\def\@metadata{}
 
-\newcommand{\correspondence}[2]{%
-  \ifx\empty\@correspondence\else\appto{\@correspondence}{; }{}{}\fi
-  \appto{\@correspondence}{%
-    \url{#1}%
-    \ifx\empty#2\else\space(#2)\fi
-  }{}{}%
-}
-
-\newcommand{\contribution}[2][]{
-  \appto{\@contribution}{%
-  \ifx\empty#1\else\textsuperscript{#1}\fi
-  #2\\
-  }{}{}
-}
-
-\newcommand{\presentaddress}[2][]{
-  \ifx\empty\@presentaddress\else\appto{\@presentaddress}{; }{}{}\fi
-  \appto{\@presentaddress}{%
-  \ifx\empty#1\else\textsuperscript{#1}\fi
-  #2%
-  }{}{}
-}
-
-\newcommand{\deceased}[1]{\def\@deceased{\textsuperscript{#1}Deceased}}
-
-\newcommand{\data}[2][]{
-  \ifx\empty\@data\else\appto{\@data}{; }{}{}\fi
-  \appto{\@data}{%
-  \ifx\empty#1\else\textsuperscript{#1}\fi
-  #2%
-  }{}{}
-}
-
-\newcommand{\funding}[2][]{
-  \ifx\empty\@funding\else\appto{\@funding}{; }{}{}\fi
-  \appto{\@funding}{%
-  \ifx\empty#1\else\textsuperscript{#1}\fi
-  #2%
-  }{}{}
-}
-
-\newcommand{\compint}[2][]{
-  \ifx\empty\@compint\else\appto{\@compint}{; }{}{}\fi
-  \appto{\@compint}{%
-  \ifx\empty#1\else\textsuperscript{#1}\fi
-  #2%
-  }{}{}
+\newcommand{\metadata}[3][]{%
+  \ifx\empty\@metadata\else\appto{\@metadata}{}{}{}\fi
+  \appto{\@metadata}{%
+    \ifx\empty#2\else\textbf{#2: }\fi
+    \ifx\empty#1\else\textsuperscript{#1}\fi
+    #3%
+    \par\bigskip
+  }
 }
 
 \reversemarginpar
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -330,21 +279,9 @@
 \setlength{\affilsep}{16pt}
 \renewcommand{\AB@affilsepx}{; \protect\Affilfont}
 
-% Insert front page meta data (to-do: would be great to loop through)
 \newcommand{\themetadata}{%
-    \textbf{\Letter \hspace{.5ex} For correspondence:\\}  \@correspondence\par
-    \ifx\empty\@contribution\else
-    \bigskip\@contribution\par\fi
-    \ifx\empty\@presentaddress\else
-    \bigskip\textbf{Present address: }\@presentaddress\par\fi
-    \ifx\empty\@deceased\else\@deceased\par\fi
-    \ifx\empty\@data\else
-    \bigskip\textbf{Data availability: }\@data\par\fi
-    \ifx\empty\@funding\else
-    \bigskip\textbf{Funding: }\@funding\par\fi
-    \ifx\empty\@compint\else
-    \bigskip\textbf{Competing interests: }\@compint\par\fi
-    \bigskip
+    \ifx\empty\@metadata\else
+    \@metadata\fi
 }
 
 % Insert authors and affiliations
