@@ -54,6 +54,13 @@
 	alldates=year,      % only show year (not month)
 ]{biblatex}
 
+% Just avoiding some rogue fields that cause issues with certain styles 
+\AtEveryBibitem{
+    \clearfield{urlyear}
+    \clearfield{urlmonth}
+    \clearlist{language}
+}
+
 % Update to your bibliography file
 \addbibresource{src/bibliography.bib}
 
