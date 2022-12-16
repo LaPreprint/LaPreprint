@@ -9,7 +9,8 @@
   <img width="297" height="420" src="https://user-images.githubusercontent.com/25629697/186181395-85edc43b-c573-4032-85da-a9227ba7721d.png">
 </p>
 <p align="center">
-  <b>A template for easily creating pretty, nicely formatted preprints in LaTeX.</b>
+  <b>A template for easily creating pretty, nicely formatted preprints in LaTeX.</b><br>
+  <b>Want to use the template again?<a href="https://github.com/roaldarbol/LaPreprint/"> Here's a link to the original repo.</a></b>
 </p>
 
 # Features
@@ -19,6 +20,7 @@ With simple options you can enable/disable:
 - Figures at the end
 - Line numbers
 - Change line spacing
+- Add section numbers
 
 See more in the [wiki](https://github.com/roaldarbol/LaPreprint/wiki).
 
