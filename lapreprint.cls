@@ -82,6 +82,10 @@
 \DeclareOption{onehalfspacing}{\@onehalfspacingtrue}
 \DeclareOption{doublespacing}{\@doublespacingtrue}
 
+%% Section numbers
+\newif\if@secnum
+\DeclareOption{secnum}{\@secnumtrue}
+
 %%% Provides extra font sizes (? - look up extsizes, https://www.ctan.org/pkg/extsizes) 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{extarticle}}
 \ExecuteOptions{}
@@ -216,20 +220,20 @@
 \renewcommand{\footrulewidth}{0.4pt}% % No footer rule
 
 % Format title
-\setcounter{secnumdepth}{0}
+\if@secnum\else\setcounter{secnumdepth}{0}\fi
 \RequirePackage[explicit]{titlesec}
 \titleformat{\section}
   {\color{MediumGrey}\Large\bfseries}
-  {\thesection}{}{#1}[]
+  {\thesection}{10pt}{#1}[]
 \titleformat{\subsection}
   {\large\bfseries}
-  {\thesubsection}{}{#1}[]
+  {\thesubsection}{10pt}{#1}[]
 \titleformat{\subsubsection}
   {\large}
-  {\thesubsubsection}{}{#1}[]    
+  {\thesubsubsection}{10pt}{#1}[]    
 \titleformat{\paragraph}
   {\color{MediumGrey}\large}
-  {\theparagraph}{}{#1}[]
+  {\theparagraph}{10pt}{#1}[]
 
 % Title spacing
 \titlespacing*{\section}{0pc}{3ex \@plus4pt \@minus3pt}{2pt}
