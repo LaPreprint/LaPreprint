@@ -46,6 +46,18 @@ S_n = \frac{X_1 + X_2 + \cdots + X_n}{n}
 \end{equation}
 denote their mean. Then as $n$ approaches infinity, the random variables $\sqrt{n}(S_n - \mu)$ converge in distribution to a normal $\mathcal{N}(0, \sigma^2)$.
 
+You can even get extra fancy and annotate your equations directly: %this uses the `annotate-equations` package. See `https://ctan.org/pkg/annotate-equations` for further info and ideas
+
+\vspace{1.5em} 
+\begin{equation}
+\label{eq:CLT2}
+S_n = \frac{\eqnmarkbox[blue]{a1}{X_1 + X_2 + \cdots + X_n}}{n}
+      = \frac{1}{n}\sum_{i}^{n} \eqnmarkbox[purple]{a2}{X_i}
+\end{equation}
+\annotate[yshift=1em]{above}{a1}{independent and identically distributed random variables}
+\annotate[yshift=-1em]{below,left}{a2}{a random variable}
+\vspace{1.5em} 
+
 \lipsum[3] 
 
 \begin{figure}
