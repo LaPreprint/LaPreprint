@@ -1,0 +1,57 @@
+% Make your own table style https://tex.stackexchange.com/questions/94799/how-do-i-color-table-columns
+\begingroup\footnotesize
+\begin{sidewaystable}
+\newcolumntype{A}{p{0.3\textwidth}}
+\newcolumntype{B}{p{0.15\textwidth}}
+\rowcolors{2}{lightColour!5}{lightColour!5}
+\begin{longtable}[l]{|A|B|B|B|B|}
+    \caption{Summary of statistical models} \label{tab:model-summary} \\
+    \hline
+    \rowcolor{LightGrey!50}
+    \multicolumn{4}{|l|}{\textbf{Candidate models}} & AIC \\
+    \hline
+    \rowcolor{white}
+    \multicolumn{5}{|l|}{\textbf{A}} \\
+    \hline
+    \multicolumn{4}{|l|}{Mean movement $\sim$ time of day * light condition * sex} & -1316.32 \\
+    \hline
+    \multicolumn{4}{|l|}{Mean movement $\sim$ Time of day + light condition + sex + time of day:light condition + 
+    time of day:sex + light condition:sex} & -1319.75 \\
+    \hline
+    \multicolumn{4}{|l|}{Mean movement $\sim$ Time of day + light condition + sex + time of day:light condition + 
+    time of day:sex} & -1323.08 \\
+    \hline
+    \multicolumn{4}{|l|}{Mean movement $\sim$ Time of day + light condition + sex + time of day:light condition} & -1324.84 \\
+    \hline
+    \multicolumn{4}{|l|}{\textbf{Mean movement $\sim$ Time of day + light condition + time of day:light condition}} & -1326.78 \\
+    \hline
+    \rowcolor{LightGrey!50}
+    \textbf{Fixed effects} & \textbf{Estimate} & \textbf{s.e.} & \textbf{\textit{t}} & \textbf{\textit{p}}\\
+    \hline
+    \rowcolor{white}
+    \multicolumn{5}{|l|}{\textbf{A}} \\
+    \hline
+    Intercept (day, L:D) & 0.047 & 0.009 & 5.109 & \\
+    \hline
+    TimeOfDay, Night & 0.082 & 0.013 & 6.448 & <0.001*** \\
+    \hline
+    Light condition, L:L & -0.015 & 0.013 & -1.108 & 0.269 \\
+    \hline
+    Light condition, D:D & -0.008 & 0.014 & -0.567 & 0.571 \\
+    \hline
+    TimeOfDay, Night : Light condition, L:L & 0.091 & 0.018 & 4.987 & <0.001*** \\
+    \hline
+    TimeOfDay, Night : Light condition, D:D & -0.050 & 0.019 & -2.659 & 0.008** \\
+    \hline
+\end{longtable}
+\end{sidewaystable}
+\endgroup
+
+% Coefficients:
+%                                    Estimate Std. Error t value Pr(>|t|)    
+% (Intercept)                        0.046827   0.009165   5.109 6.82e-07 ***
+% TimeOfDayNight                     0.082138   0.012739   6.448 6.65e-10 ***
+% light_conditionL:L                -0.014549   0.013127  -1.108   0.2689    
+% light_conditionD:D                -0.007717   0.013613  -0.567   0.5714    
+% TimeOfDayNight:light_conditionL:L  0.091225   0.018292   4.987 1.21e-06 ***
+% TimeOfDayNight:light_conditionD:D -0.050393   0.018954  -2.659   0.0084 ** 

@@ -73,28 +73,26 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Paper title
-\title{LaPreprint: \\ A Preprint Template for \LaTeX}
+\title{Third year report}
 
 % Authors - you can use \orcidlink{} and \authfn{} - see contribution note
 \author[ \orcidlink{0000-0002-9998-0058} 1 \Letter]{Mikkel Roald-Arb\o l}
-\author[2]{Co-author}
 
 % Affiliations
 \affil[1]{School of Life Sciences, University of Sussex}
-\affil[2]{University of Somewhere}
 
 % Other metadata. Feel free to add your own
-\metadata[]{\Letter\hspace{.5ex} For correspondence}{\url{https://github.com/roaldarbol/LaPreprint/issues} (MRA)}
-\metadata[\authfn{1}\authfn{2}\authfn{3}]{}{Here's a few symbols to denote contribution specifics, e.g. authors who contributed equally to the work.}
+% \metadata[]{\Letter\hspace{.5ex} For correspondence}{\url{https://github.com/roaldarbol/LaPreprint/issues} (MRA)}
+% \metadata[\authfn{1}\authfn{2}\authfn{3}]{}{Here's a few symbols to denote contribution specifics, e.g. authors who contributed equally to the work.}
 \metadata[]{Present address}{Evolution, Behaviour and Environment, School of Life Sciences, University of Sussex, Biology Road, Brighton, BN1 9RH, United Kingdom}
-\metadata[]{Data availability}{Data availability statement. Preprocessed data could be available e.g. on \href{https://zenodo.org/}{Zenodo}.}
-\metadata[]{Funding}{MRA was supported by funding from the Leverhulme Foundation. The funders had no role in the template design or decision to publish.}
-\metadata[]{Competing interests}{The author declare no competing interests.}
+% \metadata[]{Data availability}{Data availability statement. Preprocessed data could be available e.g. on \href{https://zenodo.org/}{Zenodo}.}
+\metadata[]{Funding}{MRA was supported by funding from the Leverhulme Foundation.}
+% \metadata[]{Competing interests}{The author declare no competing interests.}
 
 
 % Surname of the lead author(s) for the running footer
 \leadauthor{Roald-Arb\o l}
-\shorttitle{A Preprint Template for \LaTeX}
+\shorttitle{Third year report}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% ARTICLE START
@@ -102,12 +100,13 @@
 
 \begin{document}
 \maketitle
-\input{src/chapters/abstract}
-\input{src/chapters/introduction}
-\input{src/chapters/methods}
-\input{src/chapters/results}
-\input{src/chapters/discussion}
-\input{src/chapters/formal}
+\input{src/chapters/abstract.tex}
+\input{src/chapters/prelude.tex}
+\input{src/chapters/introduction.tex}
+\input{src/chapters/methods.tex}
+\input{src/chapters/results.tex}
+\input{src/chapters/discussion.tex}
+\input{src/chapters/formal.tex}
 \printbibliography
 
 % DON'T EDIT. If "endfloat" option is enabled all floats appear before appendices

@@ -1,0 +1,25 @@
+\section{Prelude} \label{prelude}
+\subsection{Looking back}
+As stated in my TC1 report last year, I experienced great difficulty keeping the wood ants alive outside of their colony. This problem persisted, and in late October 2021 I decided to change organisms. My requirements were that an optimal insect should be:
+\begin{itemize}
+    \item Robust to adverse temperature and humidity
+    \item Roughly the size of a wood ant
+    \item Wild and local
+    \item Non-flying
+    \item Primarily solitary
+\end{itemize} 
+
+After careful consideration, we decided that a ground beetle species would be a good alternative. Not only do they fulfil the requirements, but there is great expertise present at Sussex in Dr. Claudia Drees and Dr. Wiebke Schütt. A previous PhD student at Sussex had also successfully maintained various species of ground beetles in an incubator for years, evidencing their robustness. 
+The change of organism meant I was able to begin experiments in January 2022, and this initial work has focused on establishing some baselines of activity under various lighting conditions and ensure the feasibility of \textit{Nebria brevicollis} as a model organism for studying sleep. 
+
+\subsubsection{Big data}
+After beginning experiments, a great deal of my time was spent adapting my data processing workflow. Recording and processing videos of 24 hours or longer requires a very different approach to data analysis and management, and I have learned a lot about how to work with \textit{big data}. Learning how to write and use bash scripts has enabled me to quickly deal with incoming data, analysing data in batch. Similarly, a rigorous approach was needed for the data analysis itself, so I have written an R package to enable reproducible analysis (\{sleeprex\}).
+
+\subsubsection{Bux Recorder}
+My work on Bux, a tool for running experiments, was halted for a long while, and due to the chip shortage (and subsequent shortage of Raspberry Pi's), I decided to re-work it into a cross-platform project that can record video and control microcontrollers. The recorder is now able to use multiprocessing to record video from multiple cameras simultaneously and seamlessly, whilst saving timestamps into a logging file. This enables both multiple views of the same animal (e.g. for 3D tracking) or the potential of recording multiple experiments at the same time. There is currently rudimentary, and insufficient control for microcontrollers, but I am working on a better approach.
+
+\subsubsection{Personal reflections}
+The last year has, again, been one of ups and downs, but overall I am very satisfied with my progress and not least my ability to handle adversity. Switching model species was a hard decision to make, and moreover to accept. Initially I felt shameful for the failure to do something as seemingly easy as keeping animals alive. Over the following weeks, as I began working with the animals, I gained confidence that it was a wise decision, and shame was substituted with stress - immense stress. I started working late into the night, and it didn't take long before I experienced palpitations and spontaneous whole-body twitches along with a level of anxiety. If anything, I learned from the prior year to be aware of signals of stress and take them seriously. I quickly reigned in my working hours and sought counselling. I also began experiments in late January, which was a great relief and has provided me with some peace of mind. Currently, I feel excited that things a shaping up as I am approaching a new chapter of my PhD, and confident that I will produce PhD work that I can be immensely proud of.
+
+\subsection{Looking ahead}
+As a Leverhulme-funded student, I received 3 years of funding. I am pleased to say that Jeremy has set aside funding to keep me paid for another 6 months, taking me to the normal 3.5 years, which gives me better time to finish what I have set out to do.
