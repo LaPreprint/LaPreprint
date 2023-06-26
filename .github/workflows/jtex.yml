@@ -6,7 +6,7 @@ on:
     branches: [main]
 jobs:
   test:
-    name: test myst_config.yml
+    name: test myst_template.yml
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
