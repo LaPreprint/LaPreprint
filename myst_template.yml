@@ -1,0 +1,127 @@
+jtex: v1
+title: LaPreprint
+description: A template for easily creating pretty, nicely formatted preprints in LaTeX
+version: 1.0.0
+thumbnail: ./thumbnail.png
+authors:
+  - name: Mikkel Roald-Arbøl
+    website: https://github.com/roaldarbol/LaPreprint
+    affiliations:
+      - PhD student in Neuroscience @ University of Sussex
+tags:
+  - paper
+  - journal
+  - preprint
+license: MIT
+source: https://github.com/roaldarbol/LaPreprint
+parts:
+  - id: abstract
+    description: >
+      An abstract is a short summary of your research paper or report. A good
+      abstract will prepare readers for the detailed information to follow,
+      communicate the essence of the article and help readers take away and
+      remember key points.
+  - id: appendix
+    description: Information to put at the back of your article
+  - id: data_availability
+    description: Preprocessed data could be available, for example, on Zenodo
+  - id: funding
+    description: Include any institutions who may have funded this work.
+  - id: competing_interests
+    description: Include this section even if you declare that no competing interests
+      are present, by adding, for example "The author declare no competing interests."
+doc:
+  - id: title
+    required: true
+  - id: short_title
+  - id: authors
+    required: true
+  - id: bibliography
+  - id: keywords
+options:
+  - id: theme_color
+    type: choice
+    description: Choose between `blue` and `red` color scheme. Defaults to `blue`.
+    default: blue
+    choices:
+      - blue
+      - red
+  - id: line_spacing
+    type: choice
+    description: Use the onehalfspacing or doublespacing option for 1.5/2.0 line spacing.
+    default: single
+    choices:
+      - single
+      - onehalfspacing
+      - doublespacing
+  - id: venue_footer
+    type: choice
+    description: Show a label of the venue, like "arXiv" in the footer of each page.
+    default: preprint
+    choices:
+      - preprint
+      - biorxiv
+      - medrxiv
+      - arxiv
+      - chemrxiv
+  - id: number_sections
+    description: Number sections of the article
+    type: boolean
+  - id: line_numbers
+    type: boolean
+    description: Turn line numbers on in the PDF
+files:
+  - template.tex
+  - lapreprint.cls
+style:
+  bibliography: biblatex
+packages:
+  - alphalph
+  - amsmath
+  - authblk
+  - babel
+  - booktabs
+  - calc
+  - changepage
+  - colortbl
+  - csquotes
+  - endfloat
+  - enumitem
+  - etoolbox
+  - fancyhdr
+  - fontenc
+  - gensymb
+  - graphicx
+  - hyperref
+  - ifluatex
+  - ifsym
+  - ifxetex
+  - inputenc
+  - lastpage
+  - lineno
+  - lipsum
+  - listings
+  - longtable
+  - marginfix
+  - mdframed
+  - mhchem
+  - microtype
+  - multirow
+  - newfile
+  - newfloat
+  - opensans
+  - orcidlink
+  - pdflscape
+  - regexpatch
+  - rotating
+  - silence
+  - siunitx
+  - snotez
+  - stix
+  - subcaption
+  - tabularx
+  - textgreek
+  - titlesec
+  - unicode-math
+  - wrapfig
+  - xcolor

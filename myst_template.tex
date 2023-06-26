@@ -1,0 +1,174 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% LaPreprint: PREPRINT TEMPLATE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Here I could talk about what one should do in this document.
+% Instead I'll refer you to the explore on your own and check the Github Repo. :-)
+% Line spacing is 1.2 by default (can't be smaller).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% PREAMBLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Declare document class
+\documentclass[9pt
+[#- if options.venue_footer == "biorxiv" #],biorxiv[# endif -#]
+[#- if options.venue_footer == "medrxiv" #],medrxiv[# endif -#]
+[#- if options.venue_footer == "arxiv" #],arxiv[# endif -#]
+[#- if options.venue_footer == "chemrxiv" #],chemrxiv[# endif -#]
+[#- if options.venue_footer == "preprint" #],Preprint[# endif -#]
+[#- if options.theme_color == "red" #],red[# endif -#]
+[#- if options.line_spacing == "onehalfspacing" #],onehalfspacing[# endif -#]
+[#- if options.line_spacing == "doublespacing" #],doublespacing[# endif -#]
+[#- if options.line_numbers #],lineno[# endif -#]
+[#- if options.number_sections #],secnum[# endif -#]
+]{lapreprint}
+% Choose between "biorxiv", "medrxiv", "arxiv" and "chemrxiv". Otherwise defaults "Preprint".
+% Choose between "blue" and "red" colour scheme. Defaults to "blue".
+% Use the "onehalfspacing" option for 1.5 line spacing.
+% Use the "doublespacing" option for 2.0 line spacing.
+% Use the "lineno" option for line numbers.
+% Use the "endfloat" option to place floats after the bibliography.
+% Use the "secnum" option to have include numbers.
+
+% Import packages
+% \usepackage{lipsum}     % Required to insert dummy text
+\usepackage[version=4]{mhchem} % For chemical notation
+\usepackage{siunitx}    % For SI units
+\usepackage{pdflscape}  % For putting pages in landscape mode
+\usepackage{rotating}   % For rotating specific elements
+\usepackage{textgreek}  % Greek symbols
+\usepackage{gensymb}    % Symbols
+\usepackage[misc]{ifsym} % For the \Letter symbol
+\usepackage{orcidlink}  % For the \orcidlink
+\usepackage{listings}   % For inserting code chunks
+\usepackage{colortbl}   % For Knitr table colouring
+\usepackage{tabularx}   % For making Knitr tables compatible
+\usepackage{longtable}  % For multi-page tables
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{snotez}     % For sidenote environments. enotez for endnotes
+\usepackage{csquotes}   % For language-based quote rules (helps BiBLaTeX)
+
+[-IMPORTS-]
+
+% Make declarations
+\DeclareSIUnit\Molar{M}
+
+% Please note that these options may affect formatting.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% BIBLIOGRAPHY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[			% use biblatex for bibliography
+	backend=biber,      % use biber or bibtex backend
+    style=authoryear,   % choose style
+	natbib=true,		% allow natbib commands
+	hyperref=true,	    % activate hyperref support
+	alldates=year,      % only show year (not month)
+]{biblatex}
+
+% Just avoiding some rogue fields that cause issues with certain styles
+\AtEveryBibitem{
+    \clearfield{urlyear}
+    \clearfield{urlmonth}
+    \clearlist{language}
+}
+
+[# if doc.bibliography #]
+% Update to your bibliography file
+\addbibresource{[- doc.bibliography | join(", ") -]}
+[# endif #]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ARTICLE SETUP
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Paper title
+\title{[-doc.title-]}
+
+% Authors - you can use \orcidlink{} and \authfn{} - see contribution note
+[# for author in doc.authors -#]
+\author[
+[#- if author.orcid #] \orcidlink{[- author.orcid -]} [# endif -#]
+[-- author.affiliations|join(", ", "index") --]
+[#- if author.corresponding #] \Letter[# endif -#]
+]{[-- author.name --]}
+[# endfor #]
+
+% Affiliations
+[# for affiliation in doc.affiliations #]
+\affil[[-affiliation.index-]]{[-affiliation.value-]}
+[# endfor #]
+
+% Other metadata. Feel free to add your own
+[# for author in doc.authors #]
+[# if author.corresponding #]
+\metadata[]{\Letter\hspace{.5ex} For correspondence}{[- author.email -]}
+[# endif #]
+[# endfor #]
+[# if parts.data_availability #]
+\metadata[]{Data availability}{[-parts.data_availability-]}
+[# endif #]
+[# if parts.funding #]
+\metadata[]{Funding}{[-parts.funding-]}
+[# endif #]
+[# if parts.competing_interests #]
+\metadata[]{Competing interests}{[-parts.competing_interests-]}
+[# endif #]
+[# if doc.keywords #]
+\metadata[]{Keywords}{[-doc.keywords|join("; ")-]}
+[# endif #]
+
+
+% Surname of the lead author(s) for the running footer
+[# if doc.authors -#]
+\leadauthor{[- doc.authors[0].name -]}
+[#- endif #]
+
+[# if doc.short_title -#]
+\shorttitle{[- doc.short_title -]}
+[#- else #]
+\shorttitle{[- doc.title -]}
+[#- endif #]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ARTICLE START
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+
+[# if parts.abstract #]
+\begin{abstract}
+[-parts.abstract-]
+\end{abstract}
+[# endif #]
+
+[-CONTENT-]
+
+\printbibliography
+
+% DON'T EDIT. If "endfloat" option is enabled all floats appear before appendices
+\if@endfloat\clearpage\processdelayedfloats\clearpage\fi
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% SUPPLEMENTARY MATERIAL / APPENDICES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Sadly, we can't use floats in the appendix boxes. So they don't "float", but use \captionof{figure}{...} and \captionof{table}{...} to get them properly caption.
+[# if parts.appendix #]
+\begin{appendix}
+\begin{appendixbox}
+[-parts.appendix-]
+\end{appendixbox}
+\end{appendix}
+[# endif #]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ARTICLE END
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
