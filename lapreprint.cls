@@ -528,6 +528,7 @@
   \else
     \noindent{\bfseries\Large\color{MediumGrey}Appendix \arabic{appendix}---#1\par}
   \fi  
+  \nolinenumbers%
   \begin{mdframed}[hidealllines=true,backgroundcolor=lightColour!10,leftline=true,linecolor=lightColour,linewidth=1em]
   \if@reqslineno\addtolength{\linenumbersep}{2em}\internallinenumbers\fi
 }{%
