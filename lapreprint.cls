@@ -517,14 +517,17 @@
 
 \newcounter{appendix}
 \setcounter{appendix}{0}
-\newenvironment{appendixbox}{%
+\newenvironment{appendixbox}[1][]{%
   \setcounter{figure}{0}
   \setcounter{table}{0}
   \refstepcounter{appendix}%
   \clearpage%
-  \patchcmd{\ttlf@section}{MediumGrey}{darkColour}{}{}
-  \noindent{\bfseries\Large\color{MediumGrey}Appendix \arabic{appendix}\par}
-  \nolinenumbers%
+  \patchcmd{\ttlf@section}{LightGrey}{darkColour}{}{}
+  \ifx&#1&%
+    \noindent{\bfseries\Large\color{MediumGrey}Appendix \arabic{appendix}\par}
+  \else
+    \noindent{\bfseries\Large\color{MediumGrey}Appendix \arabic{appendix}---#1\par}
+  \fi  
   \begin{mdframed}[hidealllines=true,backgroundcolor=lightColour!10,leftline=true,linecolor=lightColour,linewidth=1em]
   \if@reqslineno\addtolength{\linenumbersep}{2em}\internallinenumbers\fi
 }{%
